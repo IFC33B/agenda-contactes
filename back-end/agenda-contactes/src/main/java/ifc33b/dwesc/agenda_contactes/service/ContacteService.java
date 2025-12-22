@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ifc33b.dwesc.agenda_contactes.dto.ContacteRequest;
 import ifc33b.dwesc.agenda_contactes.dto.ContacteResponse;
+import ifc33b.dwesc.agenda_contactes.model.Contacte;
 import ifc33b.dwesc.agenda_contactes.repository.ContacteRepository;
 
 @Service
@@ -23,5 +24,9 @@ public class ContacteService {
     }
 
     // Crear un contacto nuevo
-    public void createContacte() {}
+    public ContacteResponse createContacte(ContacteRequest contacteRequest) {
+        Contacte contacte = new Contacte(contacteRequest.getNom(), contacteRequest.getTelefon(), contacteRequest.getEmail());
+        contacteRepository.save(contacte);
+        return new ContacteResponse(contacte);
+    }
 }
