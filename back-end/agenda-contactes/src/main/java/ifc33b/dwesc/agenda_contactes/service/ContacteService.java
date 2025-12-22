@@ -17,8 +17,8 @@ public class ContacteService {
     private ContacteRepository contacteRepository;
 
     // Buscar un contacto por su nombre
-    public List<ContacteResponse> getContacte(ContacteRequest contacteRequest) {
-        return this.contacteRepository.findByNom(contacteRequest.getNom()).stream()
+    public List<ContacteResponse> getContacte(String nom) {
+        return this.contacteRepository.findByNomContainingIgnoreCase(nom).stream()
             .map(ContacteResponse::new)
             .collect(Collectors.toList());
     }

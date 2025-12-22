@@ -28,9 +28,9 @@ public class ContacteController {
     ContacteService contacteService;
 
     @GetMapping("/{nom}") // Devolver un contacto por su nombre
-    public ResponseEntity<List<ContacteResponse>> getContacte(@RequestBody ContacteRequest contacteRequest, @PathVariable String nom) {
+    public ResponseEntity<List<ContacteResponse>> getContacte(@PathVariable String nom) {
         // Service
-        List<ContacteResponse> contactes = contacteService.getContacte(contacteRequest);
+        List<ContacteResponse> contactes = contacteService.getContacte(nom);
 
         // HTTP response
         return ResponseEntity.ok(contactes);

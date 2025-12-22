@@ -10,5 +10,5 @@ import ifc33b.dwesc.agenda_contactes.model.Contacte;
 
 @Repository
 public interface ContacteRepository extends JpaRepository<Contacte, Long> {
-    List<Contacte> findByNom(String nom);
+    List<Contacte> findByNomContainingIgnoreCase(String nom);
 }
