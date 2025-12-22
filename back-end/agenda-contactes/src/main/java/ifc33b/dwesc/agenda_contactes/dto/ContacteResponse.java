@@ -8,7 +8,7 @@ public class ContacteResponse {
     // Atributos
     private Long id;
     private String nom;
-    private int telefon;
+    private String telefon;
     private String email;
 
     // Constructor
