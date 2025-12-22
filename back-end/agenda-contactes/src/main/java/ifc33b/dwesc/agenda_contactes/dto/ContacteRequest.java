@@ -1,6 +1,7 @@
 package ifc33b.dwesc.agenda_contactes.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -9,7 +10,7 @@ public class ContacteRequest {
     @NotBlank(message = "Se requiere un nombre para el contacto")
     private String nom;
 
-    @NotBlank(message = "Se requiere un teléfono para el contacto")
+    @NotNull
     private int telefon;
 
     @NotBlank(message = "Se requiere un email para el contacto")

@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -22,7 +23,7 @@ public class Contacte {
     @Column(nullable = false)
     private String nom;
 
-    @NotBlank(message = "Se requiere un teléfono para el contacto")
+    @NotNull
     @Column(nullable = false)
     private int telefon;
 
