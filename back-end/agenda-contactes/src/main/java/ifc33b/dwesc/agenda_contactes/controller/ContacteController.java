@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/api/contactes")
 public class ContacteController {
-    @GetMapping("/{nom}")
+    @GetMapping("/{nom}") // Devolver un contacto por su nombre
     public int getContacte() {
         return 0;
     }
     
-    @PostMapping()
+    @PostMapping() // Crear un contacto
     public int createContacte() {
         return 0;
     }
