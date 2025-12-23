@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { LlistaContactes } from './components/llista-contactes/llista-contactes';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [LlistaContactes],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
