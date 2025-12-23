@@ -17,15 +17,21 @@ import ifc33b.dwesc.agenda_contactes.dto.ContacteRequest;
 import ifc33b.dwesc.agenda_contactes.dto.ContacteResponse;
 import ifc33b.dwesc.agenda_contactes.service.ContacteService;
 
-
-
-
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/contactes")
 public class ContacteController {
     @Autowired
     ContacteService contacteService;
+
+    @GetMapping() // Devolver todos los contactos
+    public ResponseEntity<List<ContacteResponse>> getAllContactes() {
+        // Service
+        List<ContacteResponse> contactes = contacteService.getAllContactes();
+
+        // HTTP response
+        return ResponseEntity.ok(contactes);
+    }
 
     @GetMapping("/{nom}") // Devolver un contacto por su nombre
     public ResponseEntity<List<ContacteResponse>> getContacte(@PathVariable String nom) {
@@ -35,7 +41,7 @@ public class ContacteController {
         // HTTP response
         return ResponseEntity.ok(contactes);
     }
-    
+
     @PostMapping() // Crear un contacto
     public ResponseEntity<ContacteResponse> createContacte(@RequestBody ContacteRequest contacteRequest) {
         // Service
