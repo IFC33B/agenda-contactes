@@ -1,0 +1,18 @@
+<div class="container mx-auto p-6 h-screen">
+    <h1 class="text-3xl font-bold mb-6 text-center text-white">Agenda de Contactos</h1>
+
+    <!-- Botón Agregar Contacto -->
+    <section class="flex justify-end mb-6">
+        <button class="bg-blue-600 hover:bg-blue-700 hover:translate-y-0.5 text-white px-4 py-2 rounded shadow" (click)="toggleForm()">
+            + Agregar Contacto
+        </button>
+    </section>
+
+    <!-- Lista de contactos -->
+    <llista-contactes></llista-contactes>
+
+    <!-- Formulario para añadir contactos -->
+    @if (showForm) {
+    <formulari-contactes class="absolute top-0 left-0"></formulari-contactes>
+    }
+</div>

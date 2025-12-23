@@ -1,41 +1,50 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { Contacte } from '../../models';
 import { ContacteService } from '../../services/contacte.service';
 
 @Component({
-  selector: 'app-llista-contactes',
+  selector: 'llista-contactes',
   imports: [],
   templateUrl: './llista-contactes.html',
   styleUrl: './llista-contactes.css',
 })
 export class LlistaContactes {
-  contactes = signal<Contacte[]>([]);
-  carregant = signal(true);
-  error = signal<string | null>(null);
+  contactes: Contacte[] = [];
+  carregant = true;
+  error: string | null = null;
 
-  constructor(private contacteService: ContacteService) {}
+  constructor(private contacteService: ContacteService) { }
 
   ngOnInit(): void {
-    this.carregarContactes()
-  }
+    this.carregarContactes();
 
-  // Cargar contactos
-  carregarContactes() {
-    this.carregant.set(true);
-    this.error.set(null);
-
-    // Service
-    this.contacteService.getAllContactes().subscribe({
+    // Suscribimos al componente
+    this.contacteService.contactes$.subscribe({
       next: (dades) => {
-        this.contactes.set(dades)
-        this.carregant.set(false)
+        this.contactes = dades
+        this.carregant = false;
       },
 
       error: (err) => {
-        this.error.set('Error al cargar los contactos')
-        this.carregant.set(false);
         console.log(err);
       }
     })
+  }
+
+  // Petición inicial a la API
+  carregarContactes() {
+    this.carregant = true;
+    this.error = null;
+
+    this.contacteService.getAllContactes().subscribe({
+      next: () => {
+        this.carregant = false;
+      },
+      error: (err) => {
+        this.error = 'Error al cargar los contactos';
+        this.carregant = false;
+        console.log(err);
+      }
+    });
   }
 }

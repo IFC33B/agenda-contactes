@@ -1,12 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { LlistaContactes } from './components/llista-contactes/llista-contactes';
+import { AgendaContactes } from './components/agenda-contactes/agenda-contactes';
 
 @Component({
   selector: 'app-root',
-  imports: [LlistaContactes],
+  imports: [AgendaContactes],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('agenda-contactes');
-}
+export class App {}

@@ -1,31 +1,28 @@
-<div class="container mx-auto p-6 h-screen">
-    <h1 class="text-3xl font-bold mb-6 text-center text-white">Agenda de Contactos</h1>
+@if (carregant) {
+  <div class="flex justify-center items-center h-64">
+    <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+}
 
-    <!-- Botón Agregar Contacto -->
-    <section class="flex justify-end mb-6">
-        <button class="bg-blue-600 hover:bg-blue-700 hover:translate-y-0.5 text-white px-4 py-2 rounded shadow">
-            + Agregar Contacto
-        </button>
-    </section>
+@if (contactes.length === 0) {
+<section class="flex justify-center h-1/2">
+    <h1 class="my-auto text-4xl font-bold">No hay contacto, añade alguno!</h1>
+</section>
 
-    @if (contactes().length === 0) {
-        <section class="flex justify-center h-1/2">
-            <h1 class="my-auto text-4xl font-bold">No hay contacto, añade alguno!</h1>
-        </section>
-    } @else {
-        <!-- Lista de Contactos -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            @for (contacte of contactes(); track contacte.id) {
-            <!-- Card de Contacto -->
-            <div class="bg-gray-800 rounded-lg shadow p-4 hover:bg-gray-700 transition">
-                <h2 class="text-xl font-semibold mb-2">{{contacte.nom}}</h2>
-                <p class="text-gray-300 mb-1"><strong>Email:</strong> {{contacte.email}}</p>
-                <p class="text-gray-300 mb-3"><strong>Teléfono:</strong> {{contacte.telefon}}</p>
-                <div class="flex justify-end gap-2">
-                    <button class="text-green-400 hover:text-green-500 font-semibold">Editar</button>
-                    <button class="text-red-400 hover:text-red-500 font-semibold">Eliminar</button>
-                </div>
-            </div>
-            }
-        </section>
+} @else {
+<!-- Lista de Contactos -->
+<section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    @for (contacte of contactes; track contacte.id) {
+    <!-- Card de Contacto -->
+    <div class="bg-gray-800 rounded-lg shadow p-4 hover:bg-gray-700 transition">
+        <h2 class="text-xl font-semibold mb-2">{{contacte.nom}}</h2>
+        <p class="text-gray-300 mb-1"><strong>Email:</strong> {{contacte.email}}</p>
+        <p class="text-gray-300 mb-3"><strong>Teléfono:</strong> {{contacte.telefon}}</p>
+        <div class="flex justify-end gap-2">
+            <button class="text-green-400 hover:text-green-500 font-semibold">Editar</button>
+            <button class="text-red-400 hover:text-red-500 font-semibold">Eliminar</button>
+        </div>
+    </div>
     }
+</section>
+}

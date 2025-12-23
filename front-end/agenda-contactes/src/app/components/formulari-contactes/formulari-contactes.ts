@@ -3,16 +3,16 @@ import { ContacteService } from '../../services/contacte.service';
 import { ContacteRequest } from '../../models';
 
 @Component({
-  selector: 'app-formulari-contactes',
+  selector: 'formulari-contactes',
   imports: [],
   templateUrl: './formulari-contactes.html',
   styleUrl: './formulari-contactes.css',
 })
 export class FormulariContactes {
-  carregant = signal(false);
-  error = signal<string | null>(null);
+  carregant = false;
+  error: string | null = null;
 
-  // datos del formulari
+  // datos del formulario
   nom: string = '';
   telefon: string = '';
   email: string = '';
@@ -21,8 +21,8 @@ export class FormulariContactes {
 
   // Añadir contacto
   afegirContactes() {
-    this.carregant.set(true);
-    this.error.set(null);
+    this.carregant = true;
+    this.error = null;
 
     // Request
    const contacteRequest: ContacteRequest = {nom: this.nom, telefon: this.telefon, email: this.email};
@@ -30,12 +30,15 @@ export class FormulariContactes {
     // Service
     this.contacteService.createContacte(contacteRequest).subscribe({
       next: (dades) => {
-        this.carregant.set(false)
+        this.carregant = false
+        this.nom = '';
+        this.telefon = '';
+        this.email = '';
       },
 
       error: (err) => {
-        this.error.set('Error al añadir un contacto')
-        this.carregant.set(false);
+        this.error = 'Error al añadir un contacto'
+        this.carregant = false
         console.log(err);
       }
     })
