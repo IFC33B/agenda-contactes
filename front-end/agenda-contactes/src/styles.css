@@ -2,6 +2,11 @@
 
 @import "tailwindcss";
 
-body {
+app-root {
+    display: inline-block;
+    width: 100%;
+}
+
+app-root, body {
     height: 100vh;
 }
