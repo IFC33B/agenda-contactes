@@ -9,10 +9,33 @@ import { ContacteService } from '../../services/contacte.service';
   styleUrl: './llista-contactes.css',
 })
 export class LlistaContactes {
-  missatges = signal<Contacte[]>([]);
+  contactes = signal<Contacte[]>([]);
   carregant = signal(true);
   error = signal<string | null>(null);
 
   constructor(private contacteService: ContacteService) {}
 
+  ngOnInit(): void {
+    this.carregarContactes()
+  }
+
+  // Cargar contactos
+  carregarContactes() {
+    this.carregant.set(true);
+    this.error.set(null);
+
+    // Service
+    this.contacteService.getAllContactes().subscribe({
+      next: (dades) => {
+        this.contactes.set(dades)
+        this.carregant.set(false)
+      },
+
+      error: (err) => {
+        this.error.set('Error al cargar los contactos')
+        this.carregant.set(false);
+        console.log(err);
+      }
+    })
+  }
 }
