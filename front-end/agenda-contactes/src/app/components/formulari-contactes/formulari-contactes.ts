@@ -1,10 +1,12 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { ContacteService } from '../../services/contacte.service';
 import { ContacteRequest } from '../../models';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'formulari-contactes',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './formulari-contactes.html',
   styleUrl: './formulari-contactes.css',
 })
