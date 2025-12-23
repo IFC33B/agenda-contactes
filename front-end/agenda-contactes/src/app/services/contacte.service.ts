@@ -9,7 +9,15 @@ import { Contacte, ContacteRequest } from '../models';
 export class ContacteService {
   private apiURL = 'http://localhost:8080/api/contactes';
 
-  constructor(private http: HttpClient) {};
+  constructor(private http: HttpClient) { };
+
+  // Obtener todos los contactos
+  getAllContactes(): Observable<Contacte[]> {
+    return this.http.get<Contacte[]>(this.apiURL)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
 
   // Obtener un contacto
   getContacte(nom: string): Observable<Contacte> {
@@ -28,7 +36,7 @@ export class ContacteService {
   }
 
   // Gestión de errores
-    private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error desconocido';
 
     if (error.error instanceof ErrorEvent) {
