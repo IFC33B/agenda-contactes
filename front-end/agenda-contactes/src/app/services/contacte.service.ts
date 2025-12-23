@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Contacte } from '../models';
+import { Contacte, ContacteRequest } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +14,14 @@ export class ContacteService {
   // Obtener un contacto
   getContacte(nom: string): Observable<Contacte> {
     return this.http.get<Contacte>(`${this.apiURL}/${nom}`)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+
+  // Añadir contacto
+  createContacte(contacteRequest: ContacteRequest): Observable<Contacte> {
+    return this.http.post<Contacte>(this.apiURL, contacteRequest)
       .pipe(
         catchError(this.handleError)
       )
