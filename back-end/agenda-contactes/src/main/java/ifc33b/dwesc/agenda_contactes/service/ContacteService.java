@@ -16,11 +16,18 @@ public class ContacteService {
     @Autowired
     private ContacteRepository contacteRepository;
 
+    // Devolver todos los contactos
+    public List<ContacteResponse> getAllContactes() {
+        return this.contacteRepository.findAll().stream()
+                .map(ContacteResponse::new)
+                .collect(Collectors.toList());
+    }
+
     // Buscar un contacto por su nombre
     public List<ContacteResponse> getContacte(String nom) {
         return this.contacteRepository.findByNomContainingIgnoreCase(nom).stream()
-            .map(ContacteResponse::new)
-            .collect(Collectors.toList());
+                .map(ContacteResponse::new)
+                .collect(Collectors.toList());
     }
 
     // Crear un contacto nuevo
