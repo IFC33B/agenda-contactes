@@ -12,8 +12,8 @@ export class ContacteService {
   constructor(private http: HttpClient) {};
 
   // Obtener un contacto
-  getContacte(id: number): Observable<Contacte> {
-    return this.http.get<Contacte>(`${this.apiURL}/${id}`)
+  getContacte(nom: string): Observable<Contacte> {
+    return this.http.get<Contacte>(`${this.apiURL}/${nom}`)
       .pipe(
         catchError(this.handleError)
       )
