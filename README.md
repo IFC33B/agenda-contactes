@@ -92,10 +92,37 @@ La API está disponible en `http://localhost:8080/api/contactes`
 
 | Método | Ruta | Descripción | Status |
 |--------|------|-------------|--------|
+| GET | `/api/contactes` | Obtener los contactos | 200 |
 | GET | `/api/contactes/{nombre}` | Obtener los contactos que coincidan con el nombre buscado | 200 |
 | POST | `/api/contactes` | Crear un nuevo contacto | 201 |
 
-### 1. Obtener los contactos por nombre
+### 1. Obtener los contactos
+
+**GET** `/api/contactes`
+
+Devuelve la lista de todos los contactos
+
+**Response (200 OK):**
+```json
+[
+  {
+    "id": 1,
+    "nom": "Sefirot",
+    "telefon": "123456789",
+    "email": "email@email.com"
+  }
+  {
+    "id": 2,
+    "nom": "Cloud",
+    "telefon": "123456789",
+    "email": "email@email.com"
+  }
+]
+```
+
+---
+
+### 2. Obtener los contactos por nombre
 
 **GET** `/api/contactes/{nombre}`
 
@@ -115,7 +142,7 @@ Devuelve la lista de todos los contactos que contengan el nombre introducido.
 
 ---
 
-### 2. Crear una nueva tarea
+### 3. Crear una nueva tarea
 
 **POST** `/api/contactes`
 
@@ -159,6 +186,11 @@ Content-Type: application/json
 **Crear un contacto:**
 ```bash
 curl -v -X POST "http://localhost:8080/api/contactes"   -H "Content-Type: application/json; charset=UTF-8"   --data-raw '{"nom":"Sefirot","telefon":"123456789","email":"email@email.com"}'
+```
+
+**Obtener contactos a partir de un nombre:**
+```bash
+curl -X GET "http://localhost:8080/api/contactes"
 ```
 
 **Obtener contactos a partir de un nombre:**
