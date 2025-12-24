@@ -1,55 +1,63 @@
-<section class="max-w-md mx-auto mt-8 bg-gray-800 p-6 rounded-lg shadow-md">
-    <h1 class="text-2xl font-bold text-white mb-4">Añadir Contacto</h1>
-    
-    <form class="space-y-4" (submit)="afegirContactes()">
-        <!-- Nombre -->
-        <div>
-            <label class="block text-gray-300 mb-1" for="nom">Nombre</label>
-            <input 
-                type="text" 
-                id="nom" 
-                name="nom" 
-                class="w-full px-3 py-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Introduce el nombre"
-                [(ngModel)]="nom"
-            />
-        </div>
+<div class="py-10 bg-gray-900 min-h-screen">
+    <h2 class="text-center mb-8 text-blue-400 font-extrabold text-4xl pb-10">
+        Formulario para añadir contactos
+    </h2>
 
-        <!-- Email -->
-        <div>
-            <label class="block text-gray-300 mb-1" for="email">Email</label>
-            <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                class="w-full px-3 py-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="ejemplo@email.com"
-                [(ngModel)]="email"
-            />
-        </div>
+    <!-- Indicador de carga -->
+    @if (carregant()) {
+    <section class="flex flex-col items-center py-8">
+        <div class="animate-spin rounded-full h-12 w-12 border-4 border-blue-400 border-t-blue-600 mb-3"></div>
+        <span class="text-gray-400 text-lg">Creando contacto...</span>
+    </section>
+    }
 
-        <!-- Teléfono -->
-        <div>
-            <label class="block text-gray-300 mb-1" for="telefon">Teléfono</label>
-            <input 
-                type="tel" 
-                id="telefon" 
-                name="telefon" 
-                class="w-full px-3 py-2 rounded-md bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="123-456-789"
-                [(ngModel)]="telefon"
-            />
-        </div>
+    <!-- Mensaje de error -->
+    @if (error()) {
+    <section class="bg-red-900 text-red-400 text-center shadow-lg rounded-2xl p-6 mb-8 border border-red-700">
+        <p class="mb-3 font-semibold text-lg">{{ error() }}</p>
+        <button
+            class="px-5 py-2 border border-red-400 text-red-400 rounded-full hover:bg-red-400 hover:text-black transition-all duration-300 shadow-md"
+            (click)="reload()">
+            Volver a intentar
+        </button>
+    </section>
+    }
 
-        <!-- Botón -->
-        <div class="flex justify-end">
-            <button 
-                type="submit" 
-                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-md transition"
-            >
-                Añadir
-            </button>
-        </div>
-    </form>
-</section>
+    <!-- Formulario -->
+    @if (!carregant() && !error()) {
+    <section class="max-w-lg mx-auto bg-gray-950 rounded-2xl py-8 px-8 shadow-xl border border-gray-800">
+        <h3 class="mb-6 text-blue-400 text-center text-2xl font-bold tracking-wide">Añadir mensaje</h3>
 
+        <form (submit)="afegirContactes()" class="space-y-6">
+            <!-- nombre -->
+            <div>
+                <label for="nombre" class="block mb-2 text-blue-300 font-semibold tracking-wide">Nombre</label>
+                <input type="text" id="nombre" [(ngModel)]="nom" name="nombre" required placeholder="Pedro Sánchez"
+                    class="w-full px-5 py-3 rounded-xl bg-gray-800 text-white border border-gray-700 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 outline-none shadow-inner placeholder-gray-400 transition-all duration-300">
+            </div>
+
+            <!-- email -->
+            <div>
+                <label for="email" class="block mb-2 text-blue-300 font-semibold tracking-wide">Email</label>
+                <input id="email" rows="5" [(ngModel)]="email" name="email" required placeholder="Ejemplo@Ejemplo.com"
+                    class="w-full px-5 py-3 rounded-xl bg-gray-800 text-white border border-gray-700 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 outline-none shadow-inner placeholder-gray-400 transition-all duration-300 resize-none">
+            </div>
+
+            <!-- teléfono -->
+            <div>
+                <label for="telefono" class="block mb-2 text-blue-300 font-semibold tracking-wide">Telefono</label>
+                <input type="text" id="telefono" rows="5" [(ngModel)]="telefon" name="telefono" required placeholder="123456789"
+                    class="w-full px-5 py-3 rounded-xl bg-gray-800 text-white border border-gray-700 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 outline-none shadow-inner placeholder-gray-400 transition-all duration-300 resize-none">
+            </div>
+
+            <!-- Botón -->
+            <div class="flex justify-center">
+                <button type="submit"
+                    class="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-black font-bold px-8 py-3 rounded-full shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-2xl">
+                    Añadir contacto
+                </button>
+            </div>
+        </form>
+    </section>
+    }
+</div>

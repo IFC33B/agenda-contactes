@@ -1,10 +1,12 @@
-import { Component, signal } from '@angular/core';
-import { AgendaContactes } from './components/agenda-contactes/agenda-contactes';
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [AgendaContactes],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {}
+export class App {
+   navOpen = false;
+}

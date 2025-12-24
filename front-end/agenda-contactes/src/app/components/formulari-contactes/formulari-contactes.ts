@@ -1,20 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ContacteService } from '../../services/contacte.service';
 import { ContacteRequest } from '../../models';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'formulari-contactes',
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './formulari-contactes.html',
   styleUrl: './formulari-contactes.css',
 })
 export class FormulariContactes {
-  carregant = false;
-  error: string | null = null;
+  carregant = signal(false);
+  error = signal<string | null>(null);
 
-  // datos del formulario
+  // datos del formulari
   nom: string = '';
   telefon: string = '';
   email: string = '';
@@ -23,8 +23,8 @@ export class FormulariContactes {
 
   // Añadir contacto
   afegirContactes() {
-    this.carregant = true;
-    this.error = null;
+    this.carregant.set(true);
+    this.error.set(null);
 
     // Request
    const contacteRequest: ContacteRequest = {nom: this.nom, telefon: this.telefon, email: this.email};
@@ -32,17 +32,19 @@ export class FormulariContactes {
     // Service
     this.contacteService.createContacte(contacteRequest).subscribe({
       next: (dades) => {
-        this.carregant = false
-        this.nom = '';
-        this.telefon = '';
-        this.email = '';
+        this.carregant.set(false)
       },
 
       error: (err) => {
-        this.error = 'Error al añadir un contacto'
-        this.carregant = false
+        this.error.set('Error al añadir un contacto')
+        this.carregant.set(false);
         console.log(err);
       }
     })
+  }
+
+  // Recargar página
+  reload() {
+    window.location.reload()
   }
 }

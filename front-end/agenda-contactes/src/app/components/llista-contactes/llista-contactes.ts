@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Contacte } from '../../models';
 import { ContacteService } from '../../services/contacte.service';
 
@@ -9,42 +9,33 @@ import { ContacteService } from '../../services/contacte.service';
   styleUrl: './llista-contactes.css',
 })
 export class LlistaContactes {
-  contactes: Contacte[] = [];
-  carregant = true;
-  error: string | null = null;
+  contactes = signal<Contacte[]>([]);
+  carregant = signal(true);
+  error = signal<string | null>(null);
 
-  constructor(private contacteService: ContacteService) { }
+  constructor(private contacteService: ContacteService) {}
 
   ngOnInit(): void {
-    this.carregarContactes();
+    this.carregarContactes()
+  }
 
-    // Suscribimos al componente
-    this.contacteService.contactes$.subscribe({
+  // Cargar contactos
+  carregarContactes() {
+    this.carregant.set(true);
+    this.error.set(null);
+
+    // Service
+    this.contacteService.getAllContactes().subscribe({
       next: (dades) => {
-        this.contactes = dades
-        this.carregant = false;
+        this.contactes.set(dades)
+        this.carregant.set(false)
       },
 
       error: (err) => {
+        this.error.set('Error al cargar los contactos')
+        this.carregant.set(false);
         console.log(err);
       }
     })
-  }
-
-  // Petición inicial a la API
-  carregarContactes() {
-    this.carregant = true;
-    this.error = null;
-
-    this.contacteService.getAllContactes().subscribe({
-      next: () => {
-        this.carregant = false;
-      },
-      error: (err) => {
-        this.error = 'Error al cargar los contactos';
-        this.carregant = false;
-        console.log(err);
-      }
-    });
   }
 }

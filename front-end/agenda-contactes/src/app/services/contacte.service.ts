@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { Contacte, ContacteRequest } from '../models';
 
 @Injectable({
@@ -9,17 +9,12 @@ import { Contacte, ContacteRequest } from '../models';
 export class ContacteService {
   private apiURL = 'http://localhost:8080/api/contactes';
 
-  // Lista centralizada
-  private contactesSubject = new BehaviorSubject<Contacte[]>([]);
-  contactes$ = this.contactesSubject.asObservable();
-
   constructor(private http: HttpClient) { };
 
   // Obtener todos los contactos
   getAllContactes(): Observable<Contacte[]> {
     return this.http.get<Contacte[]>(this.apiURL)
       .pipe(
-        tap((dades) => this.contactesSubject.next(dades)),
         catchError(this.handleError)
       )
   }
@@ -36,10 +31,6 @@ export class ContacteService {
   createContacte(contacteRequest: ContacteRequest): Observable<Contacte> {
     return this.http.post<Contacte>(this.apiURL, contacteRequest)
       .pipe(
-        tap((nouContacte)  => {
-          const actual = this.contactesSubject.value;
-          this.contactesSubject.next([...actual, nouContacte])
-        }),
         catchError(this.handleError)
       )
   }
