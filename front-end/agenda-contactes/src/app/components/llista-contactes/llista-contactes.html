@@ -1,0 +1,47 @@
+<section class="p-6 bg-gray-900 h-full">
+  <h1 class="text-3xl font-bold mb-20 text-center text-white">Agenda de Contactos</h1>
+
+  <!-- Indicador de carga -->
+  @if (carregant()) {
+  <section class="flex flex-col items-center py-8">
+    <div class="animate-spin rounded-full h-12 w-12 border-4 border-blue-400 border-t-blue-600 mb-3"></div>
+    <span class="text-gray-400 text-lg">Cargando contactos...</span>
+  </section>
+  }
+
+  <!-- Mensaje de error -->
+  @if (error()) {
+  <section class="bg-red-900 text-red-400 text-center shadow-lg rounded-2xl p-6 mb-8 border border-red-700">
+    <p class="mb-3 font-semibold text-lg">{{ error() }}</p>
+    <button
+      class="px-5 py-2 border border-red-400 text-red-400 rounded-full hover:bg-red-400 hover:text-black transition-all duration-300 shadow-md"
+      (click)="carregarContactes()">
+      Volver a intentar
+    </button>
+  </section>
+  }
+
+  @if (contactes().length === 0) {
+  <section class="flex justify-center h-1/2">
+    <h1 class="my-auto text-4xl font-bold">No hay contacto, añade alguno!</h1>
+  </section>
+  } @else {
+  <!-- Barra de búsqueda -->
+  <div class="w-90 mb-20 mx-auto">
+    <input type="text" placeholder="Buscar contacto..." [formControl]="cercaText" class="w-full px-4 py-2 bg-gray-800 text-white text-lg rounded-lg
+               border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+  </div>
+
+  <!-- Lista de Contactos -->
+  <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    @for (contacte of cercarContacte(); track contacte.id) {
+    <!-- Card de Contacto -->
+    <div class="bg-gray-800 rounded-lg shadow p-4 hover:bg-gray-700 transition">
+      <h2 class="text-xl text-gray-300 font-semibold mb-2">{{contacte.nom}}</h2>
+      <p class="text-gray-300 mb-1"><strong>Email:</strong> {{contacte.email}}</p>
+      <p class="text-gray-300 mb-3"><strong>Teléfono:</strong> {{contacte.telefon}}</p>
+    </div>
+    }
+  </section>
+  }
+</section>

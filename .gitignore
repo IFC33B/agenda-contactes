@@ -1,0 +1,106 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http:/www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+replay_pid*
+
+.vscode
+
+# Frontend
+
+# Compiled output
+/front-end/agenda-contactes/dist
+/front-end/agenda-contactes/tmp
+/front-end/agenda-contactes/out-tsc
+/front-end/agenda-contactes/bazel-out
+
+# Node
+/front-end/agenda-contactes/node_modules
+/front-end/agenda-contactes/npm-debug.log
+/front-end/agenda-contactes/yarn-error.log
+
+# IDEs and editors
+/front-end/agenda-contactes/.idea/
+/front-end/agenda-contactes/.project
+/front-end/agenda-contactes/.classpath
+/front-end/agenda-contactes/.c9/
+/front-end/agenda-contactes/*.launch
+/front-end/agenda-contactes/.settings/
+/front-end/agenda-contactes/*.sublime-workspace
+
+# Visual Studio Code
+/front-end/agenda-contactes/.vscode/*
+/front-end/agenda-contactes/!.vscode/settings.json
+/front-end/agenda-contactes/!.vscode/tasks.json
+/front-end/agenda-contactes/!.vscode/launch.json
+/front-end/agenda-contactes/!.vscode/extensions.json
+/front-end/agenda-contactes/.history/*
+
+# Miscellaneous
+/front-end/agenda-contactes/.angular/cache
+/front-end/agenda-contactes/.sass-cache/
+/front-end/agenda-contactes/connect.lock
+/front-end/agenda-contactes/coverage
+/front-end/agenda-contactes/libpeerconnection.log
+/front-end/agenda-contactes/testem.log
+/front-end/agenda-contactes/typings
+/front-end/agenda-contactes/__screenshots__/
+
+# System files
+/front-end/agenda-contactes/.DS_Store
+/front-end/agenda-contactes/Thumbs.db
+
+# Backend
+
+/back-end/agenda-contactes/HELP.md
+/back-end/agenda-contactes/target/
+/back-end/agenda-contactes/.mvn/wrapper/maven-wrapper.jar
+/back-end/agenda-contactes/!**/src/main/**/target/
+/back-end/agenda-contactes/!**/src/test/**/target/
+
+### STS ###
+/back-end/agenda-contactes/.apt_generated
+/back-end/agenda-contactes/.classpath
+/back-end/agenda-contactes/.factorypath
+/back-end/agenda-contactes/.project
+/back-end/agenda-contactes/.settings
+/back-end/agenda-contactes/.springBeans
+/back-end/agenda-contactes/.sts4-cache
+
+### IntelliJ IDEA ###
+/back-end/agenda-contactes/.idea
+/back-end/agenda-contactes/*.iws
+/back-end/agenda-contactes/*.iml
+/back-end/agenda-contactes/*.ipr
+
+### NetBeans ###
+/back-end/agenda-contactes/nbproject/private/
+/back-end/agenda-contactes/nbbuild/
+/back-end/agenda-contactes/dist/
+/back-end/agenda-contactes/nbdist/
+/back-end/agenda-contactes/.nb-gradle/
+/back-end/agenda-contactes/build/
+/back-end/agenda-contactes/!**/src/main/**/build/
+/back-end/agenda-contactes/!**/src/test/**/build/
+
+### VS Code ###
+/back-end/agenda-contactes/.vscode/
