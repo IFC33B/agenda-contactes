@@ -25,34 +25,56 @@
 
     <!-- Formulario -->
     @if (!carregant() && !error()) {
-    <section class="max-w-lg mx-auto bg-gray-950 rounded-2xl py-8 px-8 shadow-xl border border-gray-800">
+    <section class="max-w-lg mx-auto bg-gray-95 rounded-2xl py-8 px-8 shadow-xl border border-gray-800">
         <h3 class="mb-6 text-blue-400 text-center text-2xl font-bold tracking-wide">Añadir mensaje</h3>
 
-        <form (submit)="afegirContactes()" class="space-y-6">
+        <form #formValidator="ngForm" (submit)="afegirContactes(formValidator)" class="space-y-6">
             <!-- nombre -->
             <div>
                 <label for="nombre" class="block mb-2 text-blue-300 font-semibold tracking-wide">Nombre</label>
                 <input type="text" id="nombre" [(ngModel)]="nom" name="nombre" required placeholder="Pedro Sánchez"
+                    minlength="4" #nombreValidator="ngModel"
                     class="w-full px-5 py-3 rounded-xl bg-gray-800 text-white border border-gray-700 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 outline-none shadow-inner placeholder-gray-400 transition-all duration-300">
+
+                @if (nombreValidator.invalid && (nombreValidator.touched || formValidator.submitted)) {
+                <p class="text-red-400 text-sm mt-1">
+                    @if (nombreValidator.errors?.['required']) { El nombre es obligatorio }
+                    @if (nombreValidator.errors?.['minlength']) { Mínimo 4 caracteres }
+                </p>
+                }
             </div>
 
             <!-- email -->
             <div>
                 <label for="email" class="block mb-2 text-blue-300 font-semibold tracking-wide">Email</label>
                 <input id="email" rows="5" [(ngModel)]="email" name="email" required placeholder="Ejemplo@Ejemplo.com"
+                    #emailValidator="ngModel" email
                     class="w-full px-5 py-3 rounded-xl bg-gray-800 text-white border border-gray-700 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 outline-none shadow-inner placeholder-gray-400 transition-all duration-300 resize-none">
+
+                @if (emailValidator.invalid && (emailValidator.touched || formValidator.submitted)) {
+                <p class="text-red-400 text-sm mt-1">
+                    Email no válido
+                </p>
+                }
             </div>
 
             <!-- teléfono -->
             <div>
                 <label for="telefono" class="block mb-2 text-blue-300 font-semibold tracking-wide">Telefono</label>
-                <input type="text" id="telefono" rows="5" [(ngModel)]="telefon" name="telefono" required placeholder="123456789"
+                <input type="text" id="telefono" rows="5" [(ngModel)]="telefon" name="telefono" required
+                    placeholder="123456789" #telefonoValidator="ngModel" pattern="^[0-9]{9}$"
                     class="w-full px-5 py-3 rounded-xl bg-gray-800 text-white border border-gray-700 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 outline-none shadow-inner placeholder-gray-400 transition-all duration-300 resize-none">
+
+                @if (telefonoValidator.invalid && (telefonoValidator.touched || formValidator.submitted)) {
+                <p class="text-red-400 text-sm mt-1">
+                    El teléfono debe tener 9 números
+                </p>
+                }
             </div>
 
             <!-- Botón -->
             <div class="flex justify-center">
-                <button type="submit"
+                <button type="submit" [disabled]="formValidator.invalid"
                     class="bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-black font-bold px-8 py-3 rounded-full shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-2xl">
                     Añadir contacto
                 </button>

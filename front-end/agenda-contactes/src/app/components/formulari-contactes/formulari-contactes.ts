@@ -22,7 +22,7 @@ export class FormulariContactes {
   constructor(private contacteService: ContacteService) { }
 
   // Añadir contacto
-  afegirContactes() {
+  afegirContactes(form: any) {
     this.carregant.set(true);
     this.error.set(null);
 
@@ -41,6 +41,8 @@ export class FormulariContactes {
         console.log(err);
       }
     })
+
+    form.resetForm();
   }
 
   // Recargar página
