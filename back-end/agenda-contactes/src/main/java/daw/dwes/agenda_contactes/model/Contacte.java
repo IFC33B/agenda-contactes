@@ -24,4 +24,14 @@ public class Contacte {
 
     @Column(nullable = false)
     private String email;
+
+    public Contacte() {
+
+    }
+
+    public Contacte(String nom, int telefon, String email) {
+        this.setNom(nom);
+        this.setTelefon(telefon);
+        this.setEmail(email);
+    }
 }
