@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/api/contactes")
-public class AgendaController {
+public class ContacteController {
 
     @PostMapping
     public int crearContacte() {
         return 0;
     }
 
-    @GetMapping
+    @GetMapping("/cerca/{nom}")
     public int getContactes() {
         return 0;
     }

@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import daw.dwes.agenda_contactes.model.Contacte;
 
-public interface AgendaRepository extends JpaRepository<Contacte, Long>{
+public interface ContacteRepository extends JpaRepository<Contacte, Long>{
     
 }
